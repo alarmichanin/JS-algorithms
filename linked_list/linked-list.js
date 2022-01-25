@@ -27,7 +27,7 @@ class LinkedList {
     }
 
     append(value) {
-        const newNode = new Node(value, this.tail);
+        const newNode = new Node(value);
         if (!this.head || !this.tail) {
             this.head = newNode;
             this.tail = newNode;
@@ -40,7 +40,7 @@ class LinkedList {
 
     find(value) {
         if (!this.head) {
-            return null;
+            return;
         }
         let currentNode = this.head;
         while (currentNode) {
@@ -49,12 +49,12 @@ class LinkedList {
             }
             currentNode = currentNode.next;
         }
-        return null;
+        return;
     }
 
     delete(value) {
         if (!this.head) {
-            return null;
+            return;
         }
         let deletedNode = null;
         while (this.head && thihs.head.value === value) {
@@ -66,7 +66,7 @@ class LinkedList {
             while (currentNode.next) {
                 if (currentNode.next.value === value) {
                     deletedNode = currentNode = currentNode.next;
-                    currentNode.next = currentNode.next;
+                    currentNode.next = currentNode.next.next;
                 } else {
                     currentNode = currentNode.next;
                 }
@@ -80,7 +80,7 @@ class LinkedList {
 
     deleteTail() {
         if (!this.tail) {
-            return null;
+            return;
         }
         const deletedTail = this.tail;
         if (this.head === this.tail) {
@@ -102,10 +102,10 @@ class LinkedList {
 
     deleteHead() {
         if (!this.head) {
-            return null;
+            return;
         }
         const deletedHead = this.head;
-        if (tjis.head.next) {
+        if (this.head.next) {
             this.head = this.head.next;
         } else {
             this.head = null;
@@ -152,9 +152,6 @@ class LinkedList {
 }
 
 let linkedList = new LinkedList();
-let node1 = new Node(12);
-let node2 = new Node("str here");
-let node3 = new Node({ "str": 12 });
-let arr = [node1, node2, node3];
+let arr = [12, "str here", { "str": 12 }];
 linkedList.fromArr(arr);
-console.log(linkedList.tail.next.next);
+console.log(linkedList);
