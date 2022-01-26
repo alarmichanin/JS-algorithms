@@ -11,6 +11,31 @@ class Heap {
         this.root = null;
     }
 
+    findPlace(node, newNode) {
+        if (!node.right) {
+            node.right = newNode;
+            return this;
+        }
+        if (!node.left) {
+            node.left = newNode;
+            return this;
+        }
+        if (value >= node.left.value) {
+            newNode.left = node.left;
+            node.left = newNode;
+            return this;
+        } else {
+            findPlace(node.left);
+        }
+        if (value >= node.right.value) {
+            newNode.right = node.right;
+            node.right = newNode;
+            return this;
+        } else {
+            findPlace(node.right);
+        }
+    }
+
     add(value) {
         const newNode = new Node(value);
         if (!this.root) {
@@ -22,32 +47,9 @@ class Heap {
             this.root = newNode;
             return this;
         }
-        function findPlace(node) {
-            if (!node.right) {
-                node.right = newNode;
-                return this;
-            }
-            if (!node.left) {
-                node.left = newNode;
-                return this;
-            }
-            if (value >= node.left.value) {
-                newNode.left = node.left;
-                node.left = newNode;
-                return this;
-            } else {
-                findPlace(node.left);
-            }
-            if (value >= node.right.value) {
-                newNode.right = node.right;
-                node.right = newNode;
-                return this;
-            } else {
-                findPlace(node.right);
-            }
-        }
-        findPlace(this.root);
+        this.findPlace(this.root, newNode);
     }
+
     fromArr(values) {
         values.map(value => this.add(value));
         return this;
