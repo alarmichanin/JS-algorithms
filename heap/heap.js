@@ -36,7 +36,7 @@ class Heap {
         }
     }
 
-    add(value) {
+    insert(value) {
         const newNode = new Node(value);
         if (!this.root) {
             this.root = newNode;
@@ -48,6 +48,10 @@ class Heap {
             return this;
         }
         this.findPlace(this.root, newNode);
+    }
+
+    delete(value) {
+
     }
 
     fromArr(values) {
