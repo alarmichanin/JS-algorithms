@@ -95,7 +95,7 @@ should be capitalized only if the original word was capitalized
 Examples
 "the-stealth-warrior" gets converted to "theStealthWarrior"
 "The_Stealth_Warrior" gets converted to "TheStealthWarrior"
-*/
+
 
 function toCamelCase(str) {
     let res = str.split(/[\-\_]/).map((word, index) => {
@@ -105,4 +105,9 @@ function toCamelCase(str) {
         return word;
     })
     return res.join("");
+}
+*/
+
+function toCamelCase(str) {
+    return str.replace(/[-_](.)/g, (_, c) => c.toUpperCase());
 }
