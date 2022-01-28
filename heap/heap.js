@@ -1,65 +1,33 @@
-class Node {
-    constructor(value, left = null, right = null) {
-        this.value = value;
-        this.left = left;
-        this.right = right;
-    }
+function Heap() { this.items = []; } Heap.prototype.swap = function (index1, index2) { var temp = this.items[index1]; this.items[index1] = this.items[index2]; this.items[index2] = temp; }
+
+Heap.prototype.parentIndex = function (index) {
+    return Math.floor((index - 1) / 2);
 }
 
-class Heap {
-    constructor() {
-        this.root = null;
-    }
-
-    findPlace(node, newNode) {
-        if (!node.right) {
-            node.right = newNode;
-            return this;
-        }
-        if (!node.left) {
-            node.left = newNode;
-            return this;
-        }
-        if (value >= node.left.value) {
-            newNode.left = node.left;
-            node.left = newNode;
-            return this;
-        } else {
-            findPlace(node.left);
-        }
-        if (value >= node.right.value) {
-            newNode.right = node.right;
-            node.right = newNode;
-            return this;
-        } else {
-            findPlace(node.right);
-        }
-    }
-
-    insert(value) {
-        const newNode = new Node(value);
-        if (!this.root) {
-            this.root = newNode;
-            return this;
-        }
-        if (value >= this.root.value) {
-            newNode.left = this.root;
-            this.root = newNode;
-            return this;
-        }
-        this.findPlace(this.root, newNode);
-    }
-
-    delete(value) {
-
-    }
-
-    fromArr(values) {
-        values.map(value => this.add(value));
-        return this;
-    }
+Heap.prototype.leftChildIndex = function (index) {
+    return index * 2 + 1;
 }
 
-let heap = new Heap();
-heap.fromArr([40, 20, 60, 25]);
-console.log(heap);
+Heap.prototype.rightChildrenIndex = function (index) {
+    return index * 2 + 2;
+}
+
+Heap.prototype.parent = function (index) {
+    return this.items[this.parentIndex(index)];
+}
+
+Heap.prototype.leftChild = function (index) {
+    return this.items[this.leftChildIndex(index)];
+}
+
+
+Heap.prototype.rightChild = function (index) {
+    return this.items[this.rightChildrenIndex(index)];
+}
+
+Heap.prototype.peek = function (item) {
+    return this.items[0];
+}
+Heap.prototype.size = function () {
+    return this.items.length;
+}
